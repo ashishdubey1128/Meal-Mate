@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <style type="text/css">
+  	html,body{
+  		height: 100%;
+  	}
+  </style>
+  <script type='text/javascript'>
+  var imageID=0;
+  function changeimage(every_seconds){
+    if(!imageID){
+        document.getElementById('alpha').style.backgroundImage="url('https://images.unsplash.com/photo-1477506350614-fcdc29a3b157?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')";
+        imageID++;
+    }
+    else{if(imageID==1){
+        document.getElementById('alpha').style.backgroundImage="url('https://images.unsplash.com/photo-1547514701-418e31cbb328?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')";
+        imageID++;
+    }else{if(imageID==2){
+        document.getElementById('alpha').style.backgroundImage="url('https://images.unsplash.com/photo-1492683513054-55277abccd99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')";
+        imageID=0;
+    }}}
+    setTimeout("changeimage("+every_seconds+")",((every_seconds)*1000));
+}
+
+
+</script>
+
+
+<style type="text/css">
+  body, html {
+  height: 100%;
+}
+#su:hover{
+  background-color: rgba(0, 0, 0,0.5);
+}
+#ln:hover{
+  background-color: rgba(0, 0, 0,0.5);
+}
+
+</style>
+
+</head>
+<body data-spy="scroll" data-target=".main" data-offset="50"  onload='changeimage(4)'>
+
+  
+
+<div style='background-image:url(https://images.unsplash.com/photo-1492683513054-55277abccd99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);background-repeat: no-repeat;background-size: cover;background-position: center;height: 100%;' class="main" id="aplha">
+<div style="width: 100%; overflow: hidden;height: 100%;">
+    <div style="width: 50%; float: left; height: 100%;border-right: 0.2px solid white;background-color: rgba(10, 10, 10,0.2);text-align: center;">
+      <div style="height: 100%">
+          <img src="/images/samadhantextbox.png" height="90%" width="90%">
+      </div>
+    </div>
+    <div style="float:right;width:50%;height: 100%;border-top: 0.2px solid white;background-color: rgba(10, 10, 10,0.4)"> 
+      <div style="height: 50%;width: 100%;border-bottom: 0.2px solid white;">
+        <a href="#y"><div style="width: 50%;float: left;height: 100%;border-right: 0.2px solid white;text-align: center;" id="su"><img src="/images/signup.png" height="20%" width="20%" style="margin-top: 30%;"><h2 style="color: white;">Signup</h2></div></a>
+
+
+        <a href="#x"><div id="ln" style="width: 50%;float: right;height: 100%;border-bottom: 0.2px solid white;text-align: center;"><img src="/images/login1.png" height="20%" width="20%" style="margin-top: 30%;"><h2 style="color: white;">Login</h2></div>
+      </div></a>
+
+
+      <div style="height: 50%;width: 100%;text-align: center;background-color: rgba(0,0,0,0.6);"><h2 style="color: white">ABOUT</h2>
+      <p style="color: white;margin-top: 5%;">This App is a Food Wastage control App for the mess around the world. An estimated 1.3 billion tons of food, or roughly 30% of the global production is lost or wasted annually which turns out to be 350 million tons a day globally. The app will monitor the wastage of food and reduce credit from the users balance.</p>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<div style="background-image: url(https://images.unsplash.com/photo-1490371475955-4cb3bfc72f71?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1055&q=80);background-size: cover;background-repeat: no-repeat;" class="slide" id="y">
+	<div class="container" style="padding-top: 75px;padding-bottom: 300px;text-align: center;">
+		<video id="review" style="height: 300px;width: 300px;padding-top: 0;padding-bottom: 0"></video>
+		<div style="margin-right: 10%;margin-left: 10%;border-radius: 40px;">
+			<button class="btn btn-sm btn-primary" onclick="cam2()">QR</button><br><br>
+				<form method="post" action="/signup">
+						<input type="text" id="username" name="username" placeholder="Enter User name" style="width: 40%;height:40px;background-color: rgba(255,255,255,0.8); border-radius: 20px;"><br><br>
+						<input type="password" name="password" placeholder="Enter Password" style="width: 40%;height:40px;background-color: rgba(255,255,255,0.8);border-radius: 20px;"><br><br>
+					<button class="btn btn-primary btn-md">Signup</button>
+				</form>	
+		</div>
+	</div>
+</div>
+
+
+
+<div style="background-image: url(https://images.unsplash.com/photo-1497445702960-c21c96af4c68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);background-size: cover;background-repeat: no-repeat;" class="slide" id="x">
+	<div class="container" style="padding-top: 75px;padding-bottom: 300px;text-align: center;">
+		<video id="preview" style="height: 300px;width: 300px;padding-top: 0;padding-bottom: 0;"></video>
+		<div style="margin-right: 10%;margin-left: 10%;border-radius: 40px;">
+			<button class="btn btn-sm btn-primary" onclick="cam1()">QR</button><br><br>
+				<form method="post" action="/login">
+						<input type="text" id="uname" name="username" placeholder="Enter User name" style="width: 40%;height:40px;background-color: rgba(255,255,255,0.8); border-radius: 20px;"><br><br>
+						<input type="password" name="password" placeholder="Enter Password" style="width: 40%;height:40px;background-color: rgba(255,255,255,0.8);border-radius: 20px;"><br><br>
+					<button class="btn btn-primary btn-md">Login</button>
+				</form>	
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+		   function cam1() {
+		   	  let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      		scanner.addListener('scan', function (content) {
+       	var zp=$(content).filter('PrintLetterBarcodeData').attr('uid');
+       	$("#uname").val(zp);
+      	});
+      	Instascan.Camera.getCameras().then(function (cameras) {
+        	if (cameras.length > 0) {
+          	scanner.start(cameras[0]);
+        	} else {
+          	console.error('No cameras found.');
+        	}
+      	}).catch(function (e) {
+        	console.error(e);
+      	});
+		   }
+
+    </script>
+    <script type="text/javascript">
+    	function cam2() {
+    		let scanner = new Instascan.Scanner({ video: document.getElementById('review') });
+      		scanner.addListener('scan', function (content) {
+       		var zp1=$(content).filter('PrintLetterBarcodeData').attr('uid');
+       		$("#username").val(zp1);
+      		});
+      		Instascan.Camera.getCameras().then(function (cameras) {
+        	if (cameras.length > 0) {
+          		scanner.start(cameras[0]);
+        	} 
+        	else {
+          		console.error('No cameras found.');
+        	}
+      		}).catch(function (e) {
+        		console.error(e);
+      		});
+    	}
+    		
+
+    </script>
+    <script type="text/javascript">
+    	
+    $(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".main a").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+  
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+
+</body>
+</html>

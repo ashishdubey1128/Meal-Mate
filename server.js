@@ -1,5 +1,18 @@
 var five = require("johnny-five");
 
+var nodemailer = require("nodemailer");
+
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ashishkdubey1128@gmail.com',
+    pass: 'ashish11281129'
+  }
+});
+
+
+
 var express = require("express");
 
 var app = express();
@@ -99,6 +112,7 @@ app.post("/register",function (req,res) {
 				username:req.body.stuname,
 				regno:req.body.regno,
 				roomno:req.body.rno,
+				email:req.body.email,
 				messbal:req.body.mb
 			},function(errr,user){
 				if(errr)
@@ -121,37 +135,129 @@ app.post("/register",function (req,res) {
 		
 
 
-var ar=["1"];
 
 app.post("/verify",function (req,res) {
-	Student.find({regno:req.body.regg},function (err,user) {
+	Student.findOne({regno:req.body.regg},function (err,user) {
 		if (err) {
 			console.log(err);
 		}
+		if(!user)
+		{
+			var z = "You are at the WRONG place!!";
+			res.render("notconfirm.ejs",{z:z});
+		}
+		else if(user.c==1)
+		{
+			var z = "OOPS!!! You have already taken your plate";
+			res.render("notconfirm.ejs",{z:z});
+		}
+		else if(user.messbal<100)
+		{
+			var z = "Running Out of Balance: Need to recharge!!";
+			res.render("notconfirm.ejs",{z:z});
+			//mail
+			var mailOptions = {
+  			from: 'ashishkdubey1128@gmail.com',
+  			to: user.email,
+  			subject: 'Mess Balance Low',
+  			text: 'RECHARGE your mess balance....running low'
+			};
+
+			transporter.sendMail(mailOptions, function(error, info){
+  			if (error) {
+    		console.log(error);
+  			}
+  			else {
+    		console.log('Email sent: ' + info.response);
+  			}
+			});
+
+		}
 		else
 		{
-			ar.forEach(function (v) {
-				if(v===req.body.regg)
-				{	
-					var z="OOPS !! Already taken once";
-					res.render("notconfirm.ejs",{z:z});
+			Student.findOneAndUpdate({regno:req.body.regg},{$set:{c:'1'}},function (errr,u) {
+				if (errr) {
+					console.log(errr);
 				}
 				else
 				{
-					var y = "Collect you Plate";
-					ar.push(req.body.regg);
-					res.render("confirm.ejs",{x:y});
-				}
+					var x = "Take your Plate !!";
+					res.render("confirm.ejs",{x:x});
+					//servo
+					// board.on("ready", function() {
+					//   var servo = new five.Servo(3);
+					//   this.repl.inject({
+					//     servo: servo
+					//   });
+					//   servo.sweep();
+					// });
 
+				}
 			});
 		}
 	});
 });
 
 
-// app.post("/deposit",function (req,res) {
-// 	Student.find
-// })
+
+app.post("/deposit",function (req,res) {
+	Student.findOne({regno:req.body.regggg},function (err,use) {
+		if (err) {
+			console.log(err);
+		}
+		else if(use.c==0)
+		{
+			var k = "Take Plate First! ";
+			res.render("notconfirm.ejs",{z:k});
+		}
+		else
+		{
+			Student.findOneAndUpdate({regno:req.body.regggg},{$set:{c:'0'}},function (errr,usse) {
+				if(errr)
+				{
+					console.log(errr);
+				}
+				else
+				{
+					if(req.body.th=='o')
+					{
+						var m = (usse.messbal - 100)-5;
+						Student.findOneAndUpdate({regno:req.body.regggg},{$set:{messbal:m}},function (er,usse){});
+						var q = "Plate Submitted with deducted amount"+" "+"Remaining Bal: "+use.messbal;
+						res.render("confirm.ejs",{x:q});
+
+						var mailOptions = {
+  						from: 'ashishkdubey1128@gmail.com',
+  						to: usse.email,
+  						subject: 'Credit Deduction',
+  						text: 'Rs. 05 has been deducted from your mess balance for wasting food. This is venture to stop food wastage. Hope you Cooperate. Good day!'
+						};
+
+						transporter.sendMail(mailOptions, function(error, info){
+  						if (error) {
+    					console.log(error);
+  						}
+  						else {
+    					console.log('Email sent: ' + info.response);
+  						}
+						});
+
+
+
+
+					}
+					else
+					{
+						var n = (usse.messbal - 100);
+						Student.findOneAndUpdate({regno:req.body.regggg},{$set:{messbal:n}},function (errrr,usse){});
+						var q = "Plate Submitted....Remaining Balance: "+use.messbal;
+						res.render("confirm.ejs",{x:q});
+					}
+				}
+			});
+			}
+		});
+});
 
 
 app.post("/delete",function(req,res)
@@ -167,16 +273,6 @@ app.post("/delete",function(req,res)
 		}
 	});
 });
-
-// board.on("ready", function() {
-
-//   var motor = new five.Motor(13);
-
-//   // Start the motor at maximum speed
-//   motor.start(255);
-//   motor
-
-// });
 
 
 

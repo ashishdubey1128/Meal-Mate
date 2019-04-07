@@ -38,7 +38,7 @@ var Student = require("./models/user");
 
 
 app.use(require("express-session")({
-	secret:"Apurva is the best",
+	secret:"****** is the best",
 	resave:false,
 	saveUninitialized:false
 }));
